@@ -55,3 +55,92 @@ bash terminal> mysql -u "root" -p
 mysql> exit
 
 ======================================================
+
+OOP ==> Object Oriented Programming 
+
+* Real world applications
+
+Object has interface; message thro interface; interface exposes what messages an object receive [abstraction]
+
+SOLID design principles
+
+S ==> Single Responsilibity 
+
+O ==> Open Close Principle
+	Closed for a change; open for extension
+
+	sort(data) {
+		// code is OCP
+	}
+
+	sort(employees)
+
+	sort(products)
+
+	sort(string)
+
+	sort(number)
+
+L ==> Liskov Substitution Principle
+	At any point of time we should be able to get the functionalities of generalized compoment with specialized component
+
+I ==> Interface seggregation
+
+D ==> Dependency Injection (Inversion Of Control)
+
+===============================================================================
+
+Java ==> Technology ==> Platform & APIs to execute bytecode
+
+Bytecode is compiled code
+
+Java as programming ==> JDK ==> javac ==> bytecode
+Kotlin ==> KDK ==> bytecode
+
+Bytecode
+
+
+=======================
+
+Employee.java
+
+public class Employee {
+	private String name;
+	private int age;
+
+	public void setName(String n) {
+		this.name = n;
+	}
+
+	public String getName() {
+		return this.name;
+	}
+
+	public int getAge() {
+		return this.age;
+	}
+}
+Compilation:
+javac Employee.java ==> Employee.class [bytecode]
+
+Test.java
+
+public class Test {
+	public static void main(String[] args) {
+		Employee danny = new Employee();
+		danny.setName("Danny");
+
+		Employee swetha = new Employee();
+		swetha.setName("Swetha");
+
+		System.out.println(swetha.getName() + ", " + swetha.getAge());
+
+	}
+}
+
+javac Test.java ==> Test.class
+
+Runtime environment
+java Test 
+
+
