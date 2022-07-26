@@ -145,7 +145,29 @@ java Test
 
 ==================================
 
+Constructors
 
-Resume @ 2:00
+* used to initialize an object
 
- 
+* special methods which has same name as that of class
+
+* can be overloaded [  more than one]
+
+* compiler creates default constructor if no constructors are written
+
+* If we write any parametrized constructor on our own; then we need to write default constructor if required
+
+================
+
+* Need to track how many account instances are created
+
+
+public static int getCount() {
+		// can't access the state of object
+		return count;
+}
+
+a1.getCount(); ==> Account.getCount(); ==> "this" pointer is not passed to getCount()
+
+================
+
