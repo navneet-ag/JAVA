@@ -171,3 +171,184 @@ a1.getCount(); ==> Account.getCount(); ==> "this" pointer is not passed to getCo
 
 ================
 
+Local variables ==> stack
+
+Instance variables ==> Heap [ copy per object]
+
+static variables ==> metaspaces along with class data [ one copy per class]
+
+===============================================================
+
+
+Logically grouping of classes:
+
+1) entity / domain / model classes
+	==> they represent business data; long lived data; survive system crush
+	==> replica of your data store
+
+	RDBMS Product table with id; name; price columns
+
+	class Product {
+		int id;
+		String name;
+		double price
+	}
+
+	Swiggy application:
+	entities: Customer; Item; Order; DeliveryPerson; Address
+
+	Uber application:
+	entities: Customer, Vehicle, Driver, Trip, Payment, Address
+
+	==> avoid any business logic in these classes;
+	==> they contain instance variables; static variables; constructors, getters, setters, equals() 
+
+2) DAO ==> Data Access Object 
+
+	==> CRUD operations on persistent store
+	CREATE READ UPDATE DELETE ==> RDBMS (MySQL) / NOSQL (mongoDB) / File system
+
+	public class ProductDao {
+
+		addProduct(Product p) {
+			"insert into products values ...." // db.products.insert({})
+
+		}
+
+		Product[] getProducts() {
+				"select * from products"; // db.products.find();
+		}
+	}
+
+
+	public class AccountDao {
+		getBalance(Account a) {
+			"select * from accounts where no =" + a.getNo()
+		}
+
+		updateAccount(Account a) {
+			"update accounts set balance = ... where no = .."
+		}
+	}
+3) Service class
+	==> layer on top of DAO and business logic
+	==> groups dao calls and provides as one call to client [ Atomic]
+
+	public class BankingService {
+		public void transferFunds(Account fromAcc, Account toAcc, double amt) {
+			// dao call to check funds in "fromAcc" // accountDao.getBalance(fromAcc)
+			// dao call to update "fromAcc"  // accountDao.update(fromAcc);
+			// dao call to update "toAcc" // accountDao.update(toAcc);
+			// dao call to insert into "transaction" table
+			// send SMS
+		}
+	}
+4) Exception class
+	==> any abnormal condition in appliaction is represented as Object
+
+5) UI tier
+	==> web, standalone command line, android
+
+===
+
+java packages ==> internally folders ==> for logically grouping classes
+
+without packages codes are not reusable
+
+=========================================
+
+Java Tools:
+1) IDE ==> Eclipse / InteliJ / NetBeans /..
+2) Maven ==> build tool 
+3) CheckStyle ==> Static code analysis ==> good naming conventions / white spaces / comments
+4) PMD / SpotBugs / FindBugs ==> Coding Stds
+	4.1) empty blocks [ conditional / catch]
+	4.2) unreachable code
+	4.3) Copy & Paste Code ==> Apply DRY
+
+5) Jenkins ==> CI / CD
+
+Sonar ==> checkstyle + SpotBugs
+
+
+Relationship between objects
+1) Generalization and Specialization
+2) Realization
+3) Association
+4) Uses A
+
+
+
+
+Generalization and Specialization relationship in OOP we call it as inheritance
+
+public class Product {}
+
+public class Mobile extends Product {}
+
+public class Tv extends Product {}
+
+Product implicitly extends Object
+
+Object is the root of all classes in Java // single root hierarchy
+
+---
+
+* Java doesn't support multiple inheritance
+
+public class Mobile extends Product, Toy {} // ERROR
+
+===============================
+
+
+constructors in inheritance:
+
+public class Product {
+	public Product() {
+		"p1"
+	}
+
+	public Product(int id, String name) {
+		"p2"
+	}
+}
+
+public class Mobile extends Product {
+	public Mobile() {
+		"m1"
+	}
+
+	public Mobile(int id, String name, String connectivity) {
+		"m2"
+	}
+}
+
+new Mobile(); // "p1" & "m1" ==> Object() ==> Product() ==> Mobile()
+
+new Mobile(123, "iPhone", "4G"); // "p1" & "m2"
+
+===
+
+make changes:
+public Mobile(int id, String name, String connectivity) {
+		super(id, name);
+		"m2"
+}
+
+new Mobile(123, "iPhone", "4G"); // "p2" & "m2"
+
+by default:
+public Mobile() {
+		super();
+		"m1"
+	}
+
+public Mobile(int id, String name, String connectivity) {
+		super();
+		"m2"
+}
+
+=================
+
+
+
