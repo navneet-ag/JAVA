@@ -350,5 +350,88 @@ public Mobile(int id, String name, String connectivity) {
 
 =================
 
+Methods in inheritance
+
+all methods in java are virtual ==> dynamic bindings
+
+public class Product {
+	public String getName() {
+		return "Prd";
+	}
+	public double getPrice() {
+		return 100;
+	}
+}
+
+
+public class Mobile extends Product {
+	// override
+	public double getPrice() {
+		return 999;
+	}
+
+	public String getConnectivity() {
+		return "5G";
+	}
+}
+
+
+Mobile m = new Mobile();
+m.getPrice(); // 999;
+m.getName(); // Prd
+
+
+Product p1 = new Mobile(); // upcasting
+p1.getName(); // Prd
+p1.getPrice(); // 999
+p1.getConnectivty(); // Compilation ERROR
+
+====================================================
+
+
+
+		Product[] products = new Product[500]; // Array of 5 Pointers
+		products[0] = new Tv(133, "Sony Bravia", 135000.00, "LED"); // upcasting
+		products[1] = new Mobile(453, "MotoG", 12999.00, "4G");
+		products[2] = new MicroWave(..)
+		products[3] = new Fridge(...)
+		products[4] = new DishWasher(..);
+
+
+Mobile[] mobiles = ...
+
+for(Mobile m : mobiles) {
+	///
+}
+
+Tv[] tvs = ...
+
+for(Tv t: tvs) {
+	/..
+}
+
+MW mws = ...
+
+for(MW m : mws) {
+	// ...
+}
+
+===
+
+
+Product p = new Mobile();
+
+(p instanceof Product) ==> true
+
+(p instanceof Mobile) ==> true
+
+(p instanceof Object) ==> true
+
+(p instanceof Tv) ==> false
+
+----
+
+(p.getClass() === Product.class) ==> false
+(p.getClass() === Mobile.class) ==>true
 
 
