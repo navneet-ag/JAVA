@@ -1,5 +1,7 @@
 package com.adobe.prj.client;
 
+import java.lang.reflect.Method;
+
 import com.adobe.prj.entity.Mobile;
 import com.adobe.prj.entity.Product;
 import com.adobe.prj.entity.Tv;
@@ -16,9 +18,30 @@ public class ProductClient {
 		
 		displayExpensive(products);
 		
-		displayDetails(products);
+//		displayDetails(products);
+		
+		displayDetailsOCP(products);
+		
 	}
 
+	// OCP using Reflection API
+	private static void displayDetailsOCP(Product[] products) {
+		for(Product p : products) {
+			System.out.println("***********");
+			Method[] methods = p.getClass().getMethods();
+			for(Method m : methods) {
+				if(m.getName().startsWith("get")) {
+					try {
+						Object ret = m.invoke(p);
+						System.out.println(m.getName().substring(3).toUpperCase() + " : " + ret);
+					} catch(Exception ex) { ex.printStackTrace(); }
+				}
+			}
+			System.out.println("***********");
+		}
+	}
+
+	// IS this OCP?
 	private static void displayDetails(Product[] products) {
 		for(Product p : products) {
 			System.out.println("**********");
