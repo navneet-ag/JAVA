@@ -554,7 +554,43 @@ Why Program to interface?
 6) OCP
 
 
+MobileDao mobileDao = new MobileDaoMySqlImpl();
 
+Advantages:
+1) Loose coupling; easliy we can swithc to different implmentation
+
+Disadvantages:
+Swithcing between strategies involves changing different client code [ Web / Console / ...]
+Exposing type of storage/usage to client 
+
+
+Solution : use Factory Pattern
+
+
+==============
+
+Factory Method:
+static Plants[] getPlants(String season) {
+	case SUMMER: 
+		///
+	case WINTER:
+		...
+	case RAINY:
+		...
+	case SPRING:
+		...
+}
+
+
+
+
+client 
+
+Plants[] plants = getPlants("SUMMER");
+
+Plants[] plants = getPlants("RAINY");
+
+======================================================
 
 
 
