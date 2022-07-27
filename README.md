@@ -590,7 +590,76 @@ Plants[] plants = getPlants("SUMMER");
 
 Plants[] plants = getPlants("RAINY");
 
-======================================================
+========================================================================
+
+Generics
+
+public class Rectangle {
+	int width;
+	int breadth;
+	//
+}
+
+
+Rectangle r1 = new Retangle(3,4);
+
+
+
+
+public class DRectangle {
+	double width;
+	double breadth;
+	//
+}
+
+DRectangle r2 = new DRectnagle(1.2, 3.4);
+
+Solution:
+
+public class Rectangle <T> {   ==> public class Rectangle {
+	T width; 					==> Object width;
+	T breadth; 					==> Object breadth;
+} 								}
+
+
+
+
+Rectangle<Integer> r1 = new Retangle<Integer>(3,4);
+Rectangle<Double> r2 = new Retangle<Double>(1.3,4.4);
+Rectangle<String> r3 = new Retangle<String>("a","b");
+
+
+Generics can be used only for Object type and not for primitive type
+
+Integer is a typewrapper for int
+Double is a typewrapper for double
+
+int x = 10;
+
+Integer iX = x ; // boxing
+
+int y = iX; // unboxing
+
+y++;
+y += 20;
+
+
+
+
+
+public class Rectangle <T extends Number> {   ==> public class Rectangle {
+	T width; 									==> Number width;
+	T breadth; 									==> Number breadth;
+} 								
+
+
+Rectangle<Integer> r1 = new Retangle<Integer>(3,4); //valid
+Rectangle<Double> r2 = new Retangle<Double>(1.3,4.4); // valid
+Rectangle<String> r3 = new Retangle<String>("a","b"); // error
+
+
+======================================================================
+
 
 
 
