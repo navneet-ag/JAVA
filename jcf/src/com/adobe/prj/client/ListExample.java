@@ -18,12 +18,26 @@ public class ListExample {
 		products.add(new Product(88, "HP Printer", 19000.00, "computer"));
 		products.add(new Product(834, "Logitech Mouse", 600.00, "computer")); // supports duplicate elements
 	
-		//Collections.sort(products);
-		Collections.sort(products, (p1, p2) -> Double.compare(p1.getPrice(), p2.getPrice()));
+		System.out.println("*******");
+		products.stream()
+			.filter(p -> p.getCategory().equals("mobile"))
+			.forEach(p -> System.out.println(p));
 		
-		for(Product p : products) {
-			System.out.println(p);
-		}
+		System.out.println("*******");
+		
+		products.stream()
+			.map(p -> p.getName())
+			.forEach(p -> System.out.println(p));
+		
+		System.out.println("*******");
+		
+		
+		//Collections.sort(products);
+//		Collections.sort(products, (p1, p2) -> Double.compare(p1.getPrice(), p2.getPrice()));
+//		
+//		for(Product p : products) {
+//			System.out.println(p);
+//		}
 	}
 
 }
