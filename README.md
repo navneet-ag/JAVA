@@ -983,5 +983,50 @@ List<String> names = new ArrayList<String>();
 
 =============
 
- 
+ Stream
+ A stream is a sequence of data; on which we can be pipeline functionalities to produce the desired result.
+
+HOF ==> High Order functions 
+==> functions which accept other function as argument
+==> function return function
+
+
+
+* forEach ==> perform action on each element
+* filter ==> subset
+* map ==> transform data
+* reduce ==> sum(), avg(), count() ==> aggregate of data
+* collect
+* limit 
+* skip
+* flatMap 
+
+
+--
+terminal functions:
+forEach, reduce, collect
+
+intermediate functions:
+filter, map, limit, skip, flatMap
+
+
+Data flows thro stream only if any terminal function is connected
+
+
+// give me the names of mobiles
+List<String> = products.stream()....
+
+	List<String> ==> iPhone, OnePlus 6
+
+================
+
+learn 
+* flatMap()
+* read about HashSet
+* Different comments [ single , multiline, javadoc]
+
+===========================
+
+
+
 
