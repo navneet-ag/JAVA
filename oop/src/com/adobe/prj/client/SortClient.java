@@ -28,6 +28,7 @@ public class SortClient {
 		for(Product p : products) {
 			System.out.println(p);
 		}
+		
 	}
 
 }

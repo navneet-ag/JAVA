@@ -660,10 +660,160 @@ Rectangle<String> r3 = new Retangle<String>("a","b"); // error
 
 ======================================================================
 
+interface for OCP
+
+public interface Comparable<T> {
+	 public int compareTo(T o);
+}
+
+public class Product implements Comparable <Product> {
+	...
+	 public int compareTo(Product other) {
+	 	// logic to compare "this" with "other" and return difference
+	 }	
+}
+
+
+public class Rectangle implements Comparable<Rectangle> {
+	///
+	 public int compareTo(Rectangle other) {
+	 	// logic to compare "this" area with "other" area
+
+	 }
+}
+
+
+r1.compareTo(r2); // this ==> r1 ;  other ==> r2
+
+
+===============
+
+Task:
+
+package com.adobe.prj.entity;
+
+public class Book ....
+
+	String title;
+	double price;
+
+
+SortClient.java
+
+Book[] books = ....
+books[0] =
+books[1] =
+books[2] =
+books[3] =
+
+
+Utility.sort(books); // don't change sort()
+
+// print books books should be printed sorted based on title
+
+
+=================================
+
+"Brad".compareTo("Angelina")
+ ==> 1
+
+=================================
+
+
+interface Flyable {
+	fly();
+}
+
+interface Dance {
+	dance();
+}
+
+
+interface Swim {
+	swim();
+}
+
+// actor can dance
+class Actor implements Dance {
+	//
+	dance() {
+
+	}
+}
+// hero IS A Actor
+
+class Hero extends Actor implements Flyable , Swim {
+	fly() {..}
+	swim() {..}
+}
+
+Flyable f = new Flyable(); // can't instantiate interface
+
+Flyable f = new Hero(); // VALID
+
+f.fly(); 
+
+f.swim(); // ERROR, hero can swim() but Flyable can send only fly()
+
+Swim s = (Swim) f;
+s.swim(); // Hero is swimming
+
+
+=========================
+
+interface Flyable {
+	void fly();
+}
+
+Flyable f = new Flyable(); // error ==> can't instantiate interface
+
+
+class Bird implements Flyable {
+	//state
+	// behaviour
+
+	public void fly() {
+		///
+	}
+}
+
+Bird b1 = new Bird("Eagle");
+Bird b2 = new Bird("Crow");
 
 
 
+class AeroPlane implements Flyable {
+	// state
+	// behaviour
+	public void fly() {
 
+	}
+}
+
+class Dummy implements Flyable {
+	public void fly() {
+		System.out.println("jump from 10th floor!!!");
+	}
+}
+
+class Dummy2 implements Flyable {
+	public void fly() {
+		System.out.println("jump from 15th floor!!!");
+	}
+}
+
+Flyable f = new Dummy();
+
+// Anonymous class
+Flyable f = new Flyable() {
+	public void fly() {
+		System.out.println("jump from 10th floor!!!");
+	}
+}
+
+f.fly();
+
+============================
 
 
 
