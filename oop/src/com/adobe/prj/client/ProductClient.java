@@ -15,7 +15,8 @@ public class ProductClient {
 		products[2] = new Tv(634, "Onida Thunder", 3500.00, "CRT");
 		products[3] = new Mobile(621, "iPhone XR", 99999.00, "4G");
 		products[4] = new Mobile(844, "Oppo", 9999.00, "4G");
-		
+//		products[5] = new Product(); // error because Product is marked abstract
+ 		
 		displayExpensive(products);
 		
 //		displayDetails(products);

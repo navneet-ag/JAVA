@@ -434,4 +434,131 @@ Product p = new Mobile();
 (p.getClass() === Product.class) ==> false
 (p.getClass() === Mobile.class) ==>true
 
+===============================
+
+If we know method name in advance:
+context.method();
+Example:
+acc.deposit();
+
+method.invoke(context);
+
+
+====
+
+Product p = new Tv(133, "Sony Bravia", 135000.00, "LED");
+Method[] methods = p.getClass().getMethods();
+
+// p.getClass() ===> Tv.class
+
+* getMethods(); ==> 
+	String getScreenType()
+	void setScreenType(String screenType) {
+	public int getId() {
+	public void setId(int id) {
+	public String getName() {
+	public void setName(String name) {
+	+
+	methods of Object
+
+====================================================
+
+Day 1 Recap:
+OOP, JRE, JVM
+Metaspace, Stack, Heap [Headers ==> class, hashcode, lock, ...; state of the object ==> instance variables]
+
+static variables ==> Metaspace
+local variables ==> Stack
+
+constructor ==> to initailze the state of object
+
+Generalization and Specialization relationship ==> Inheritance ==> keyword "extends"
+
+Java Object is the root class for every class
+Java doesn't support multiple-inheritance
+
+Java all instance methods are virtual by default ==> dynamic binding happens if we override a method
+
+static methods ==> static binding
+
+OCP ==> upcasting
+Reflection API
+
+	methodPtr.invoke(context, arguments);
+
+
+without reflection API:
+	context.methodA(arguments);
+	context.methodB(arguments);
+
+======================
+
+Day 2
+
+"abstract" keyword
+
+1) for class
+"Product" is just for generalization purpose; in real world "Product" by itself doesn;t exist;
+we are not supposed to create instance of product
+public abstract class Product {
+}
+
+new Product(); // error an't instantiate abstract class
+
+
+2) for method
+
+public abstract boolean isExpensive();
+
+like pure virtual functions
+
+
+* abstract class need not have abstract methods
+* if one of the method is declared abstract; then class also has to be declared abstract
+* inherited class should implement abstract methods of base class else declare that class also as "abstract"
+
+=========================
+
+
+* Realization Relationship
+
+An object will realize the contract/ rules specified by other object/component in order to communicate
+
+achevied using interface in java
+
+interface interfaceName {
+	abstract methods
+	constants
+	// no instance variable
+}
+
+
+Example:
+* entities ==> ER 
+* interfaces
+
+enteties and interfaces are shared as common module to all team members working on various modules
+
+interface EmployeeDao {
+	void addEmployee(Employee e);
+	Employee getEmployee(int id);
+}
+
+
+Why Program to interface?
+1) DESIGN 
+2) IMPLEMETNTION
+3) TESTING in ISOLATION
+4) INTEGRATION
+5) LOOSE COUPLING
+6) OCP
+
+
+
+
+
+
+
+
+
 
