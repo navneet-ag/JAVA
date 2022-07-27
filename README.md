@@ -816,4 +816,125 @@ f.fly();
 ============================
 
 
+interfaces with only one method to implement can be marked as @FunctionalInterface
+Built-in @FunctionalInterface
+
+1) 
+@FunctionalInterface
+public interface Predicate<T> {
+  boolean test(T t);
+}
+
+2) 
+@FunctionalInterface
+public interface Consumer<T> {
+	void accept(T t);
+}
+
+3) 
+
+@FunctionalInterface
+public interface Function<T, R> {
+	R apply(T t);
+}
+
+4)
+@FunctionalInterface
+public interface BiFunction<T, U, R> {
+	R apply(T t, U u);
+}
+
+5) 
+@FunctionalInterface
+public interface Runnable {
+	 public abstract void run();
+}
+
+
+filter(data, new Predicate() {
+	@Override
+	public boolean test(Object e) {
+		e -> e % 2 == 0
+	}
+});
+
+Using Lambda
+filter(data, e -> e % 2 == 0);
+
+========================================
+
+
+Data Containers ==> Java Collection Framework provides lots of data containers
+
+* Array is a data container
+--> size is fixed; can't grow / shrink
+--> Adding / removing from arbitrary position is difficult
+
+java.util package
+
+Comparable ==> comparision based on logic written in the object ==> Natural Comparsion ==> Primary Key most of the time
+
+	String ==> Lexical
+	Employee, Product ==> based on id
+
+Comparator ==> comarision based on client logic for various fields of object
+
+
+Product
+	id
+	name
+	price
+	category
+
+	compareTo() {
+			based on id
+	}
+
+========
+
+Client 1 needs to sort by price?
+	logic to compare by price
+
+client 2 by name
+	logic to compare by name
+
+
+LengthComparator.java
+class LengthComparator implements Comparator {
+	public int compare(String o1, String o2) {
+				return o1.length() - o2.length();
+			}
+}
+
+Arrays.sort(names, new LengthComparator());
+
+
+class PriceComparot implements Comparator {
+	 
+}
+
+===
+
+Arrays.sort(names, (o1, o2) -> o1.length() - o2.length());
+	
+sort(elems) {
+	for i = 0 ; i< elems.length
+	 for j = j + 1;  j< elems.length
+	 	if(elem[i].compareTo(elem[j])> 0) {
+	 		swap
+	 	}
+}
+
+sort(elems, comparator) {
+	for i = 0 ; i< elems.length
+	 for j = j + 1;  j< elems.length
+		if(comparator.compare(elem[i], elem[j])) {
+			swap
+		}
+}
+
+===============
+
+
+
 
