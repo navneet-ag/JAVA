@@ -31,7 +31,14 @@ public class SortClient {
 		products[4] = new Product(912, "One Plus", 32000.00, "mobile");
 		products[5] = new Product(88, "HP Printer", 19000.00, "computer");
 		
-		Arrays.sort(products);
+//		Arrays.sort(products);
+		// sort by price
+		
+		Arrays.sort(products, (p1, p2) -> Double.compare(p1.getPrice(), p2.getPrice()));
+		
+//		Arrays.sort(products, (p1, p2) -> (int)(p1.getPrice() -p2.getPrice()));
+		
+//		Arrays.sort(products, (p1, p2) -> p1.getName().compareTo(p2.getName()));
 		
 		for(Product p : products) {
 			System.out.println(p);

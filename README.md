@@ -935,6 +935,52 @@ sort(elems, comparator) {
 
 ===============
 
+Using lambda expression sort products by price
+
+JCF:
+
+List type of data container:
+* can grow or shrink
+* ordered
+* supports duplicate elements
+* supports index based operation
+	add(obj, 5);
+	remove(10);
+	get(2);
+* re-order ==> sort(), shuffle(), reverse()
+
+implementations of List interface:
+1) Vector (legacy)
+2) ArrayList
+3) LinkedList
+
+
+ArrayList list = new ArrayList();
+list.add(...)
+
+Program to interface:
+List list = new ArrayList();
+
+list.add("a");
+list.add(12);
+list.add(new Product());
+
+above code is not Type-Safe
+
+if(list.get(i) instanceof Product) {
+	Product p = list.get(1);
+}
+
+--
+
+Prefer Generic collections
+
+List<String> names = new ArrayList<String>();
+
+	names.add("a"); // ok
+	names.add(12); // complication error
+
+	
 
 
 
