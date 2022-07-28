@@ -1183,6 +1183,37 @@ local-mysql ==> container
 
 port 3306
 
+================
+
+once docker container is running
+
+* access docker container
+
+$ docker exec -it local-mysql bash
+root@a89ad477d23e:/# mysql -u "root" -p
+Enter Password: Welcome123
+
+mysql> create database adobe_java;
+mysql> use adobe_java;
+
+================================================
+
+
+groupID ==> reverse domain + projectname ==> com.adobe
+artificatID ==> database
+version => 1.0.0
+
+Any changes to "pom.xml"
+
+Right click Project ==> Maven ==> update project ==> Force Update ==> "OK button"
+
+
+
+
+
+
+
+
 
 
 
