@@ -1436,7 +1436,29 @@ web.xml ==> deployment descriptor
 	<url-pattern>/register</url-pattern>
 </servlet-mapping>
 
-============================
+================================
+
+
+Project ==> Right click ==> Run As ==> Maven build
+Goals: jetty:run
+
+Browser:
+http://localhost:8080/
+
+
+===
+
+Project ==> Right click ==> Run As ==> Maven build
+Goals: package
+
+war file "C:\Trainings WS\Adobe\July2022\JAVA\database\target\database-1.0.0.war"
+create should be taken to deployment server
+
+=============
+
+
+
+
  
 
 
