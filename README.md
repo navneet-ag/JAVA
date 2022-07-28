@@ -1369,11 +1369,11 @@ mysql> create database adobe_java;
 mysql> use adobe_java;
 
 
-create table products (id int PRIMARY KEY AUTO_INCREMENT, name VARCHAR(100), price double, quantity int);
+mysql> create table products (id int PRIMARY KEY AUTO_INCREMENT, name VARCHAR(100), price double, quantity int);
 
-insert into products values (0, 'LG AC', 45000.00, 100);
-insert into products values (0, 'Samsung Fold', 165000.00, 100);
-select * from products;
+mysql> insert into products values (0, 'LG AC', 45000.00, 100);
+mysql> insert into products values (0, 'Samsung Fold', 165000.00, 100);
+mysql> select * from products;
 
 
 ======================================================

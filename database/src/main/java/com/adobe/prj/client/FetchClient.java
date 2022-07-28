@@ -17,7 +17,8 @@ public class FetchClient {
 				System.out.println(p.getName()  +", " + p.getPrice());
 			}
 		} catch (DaoException e) {
-			e.printStackTrace();
+			e.printStackTrace(); // development mode
+//			System.out.println(e.getMessage()); // production mode
 		}
 	}
 
