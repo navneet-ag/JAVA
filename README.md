@@ -1027,6 +1027,124 @@ learn
 
 ===========================
 
-Day 3
+Day 2:
+	Comparable and Comparator ==> both are for comparision to sort(), max(), min()
+
+	Comparable logic is part of class / object
+
+	public class String implments Comprable<String> {
+
+		int compareTo(String other) { NaturalComparision logic }
+	}
+
+	public class Product implments Comparable<Product> {
+		int compareTo(Product other) { based on id}	
+	}
 
 
+	client:
+		Product [] ....
+
+		Arrays.sort()
+
+		List<Product> products
+
+		Collections.sort(products); // uses logic written within Product class
+
+
+		// client needs other way of comparison other than based on ID
+		Collections.sort(products, new Comparator(..) { ...})
+		Collections.sort(products, (p1, p2) -> p1.getName().compareTo(p2.getName())); // compare based on name
+		Collections.sort(products, Double.compare(p1.getPrice(), p2.getPrice()); //compare based on price
+
+List<Product> products = new LinkedList<>();
+
+
+Day 3:
+
+Object equality: equals() vs == 
+
+
+Rectangle r1 = new Rectangle(4,5);
+
+Rectangle r2 = new Rectangle(4,5);
+
+Rectangle r3 = new Rectangle(2,7);
+
+Rectangle ref = r1; // reference
+
+if(ref == r1) // true
+
+if(r1 == r2) // false
+
+
+if(r1.equals(r2)) // should evaluate to true
+
+============
+
+
+HashCode: Numerical value of Object
+
+* 2 similar objects should have same hashcode
+
+* Possiblity: 2 objects which are different can also have same hashcode
+
+public class Rectangle {
+
+
+	public int hashCode() {
+		return w * b;
+	}
+}
+
+
+Rectangle r1 = new Rectangle(4,5); ==> 20
+Rectangle r1 = new Rectangle(5,4); ==> 20
+Rectangle r1 = new Rectangle(10,2);
+Rectangle r1 = new Rectangle(20,1);
+Rectangle r1 = new Rectangle(2,10);
+
+
+
+	public int hashCode() {
+		return 2 pow 1 + w *  2 pow 2 + b;
+	}
+===
+
+HashSet and HashMap  / Hashtable uses hashCode() and equals() to identify duplicates and placing data in container
+
+
+Set<Product> products = new HashSetProduct>();
+		products.add(new Product(645, "Hp Laptop", 135000.00, "computer"));
+		products.add(new Product(224, "iPhone", 98000.00, "mobile"));
+		products.add(new Product(834, "Logitech Mouse", 600.00, "computer"));
+		products.add(new Product(5, "Sony Bravia", 125000.00, "tv"));
+		products.add(new Product(912, "One Plus", 32000.00, "mobile"));
+		products.add(new Product(88, "HP Printer", 19000.00, "computer"));
+		products.add(new Product(834, "Logitech Mouse", 600.00, "computer")); // not added ==> duplicate elements
+
+===============
+
+
+Map ==> key / value pair
+
+* Dictionary [ key ==> word; value ==> meaning]
+* Registry
+
+key ==> unique
+value ==> can be duplicate
+
+===
+
+Set is a unique collection
+not ordered
+can't reorder ==> sort(), shuffle(), reverse() are not supported
+
+
+========================================
+
+
+
+
+
+	
