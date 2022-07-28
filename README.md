@@ -1207,6 +1207,72 @@ Any changes to "pom.xml"
 
 Right click Project ==> Maven ==> update project ==> Force Update ==> "OK button"
 
+==========================
+
+JDBC ==> Java Database Connectivity ==> to connect to RDBMS
+
+==> JDBC is a set of interfaces
+==> implementation classes are provided by database vendors [ Oracle / MySQL / Postgress]
+	String of Java ==> VARCHAR2 in oracle
+	String of Java ==> VARCHAR in MySQL
+	String of Java ==> TEXT in SQL-SERVER
+
+	<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>8.0.30</version>
+		</dependency>
+
+
+Steps to connect to database:
+
+1) Load driver classes provided by database vendors
+
+	Class.forName("driver class")
+
+	Class.forName("com.mysql.cj.jdbc.Driver");
+	Class.forName("oracle.jdbc.Driver");
+
+2) Establish database connection
+	Connection is interface provided by jdbc
+
+	Connection con = DriverManager.getConnection(URL, USER, PWD);	
+
+	getConnection() is a factory method creates OracleConnection / MySQLConnection ... based on URL passed
+
+
+	Example:
+
+	Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/adobe_java", "root", "Welcome123");	
+
+  
+	Connection con = DriverManager.getConnection("jdbc:oracle:@localhost:1521/adobe_java", "root", "Welcome123");	
+
+https://sqlzoo.net/
+
+3) SEND SQL statements
+	3 interfaces are present to send SQL
+	a) Statement
+		id SQL is fixed ==> same sql for all requests
+		"select * from products"
+	b) PreparedStatement
+		if SQL takes IN parameter 
+
+		"select * from products where id = ?"
+
+		"insert into users values (?,?,?)"
+
+
+	c) CallableStatement
+		==> to invoke stored procedures of database
+
+	methods:
+	a) int executeUpdate(SQL) ==> INSERT, DELETE and UPDATE SQL
+	b) ResultSet executeQuery(SQL) ==> SELECT
+
+4) Close connection
+
+
 
 
 
