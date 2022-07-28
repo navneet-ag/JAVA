@@ -1143,6 +1143,45 @@ can't reorder ==> sort(), shuffle(), reverse() are not supported
 
 ========================================
 
+Maven / Gradle / Ivy / Builder
+*	Maven is a build automation tool used primarily for Java projects.
+==> process of clean, build , test, deploy
+
+==> Dependency managment ==> 3rd party libraries ==> smallest project may have 30+ dependecies [jar]
+
+Project Object Model
+pom.xml
+
+<dependecies>
+	<dependency>
+    	<groupId>mysql</groupId>
+    	<artifactId>mysql-connector-java</artifactId>
+    	<version>8.0.30</version>
+	</dependency>
+	<dependency>
+    	<groupId>org.springframework</groupId>
+    	<artifactId>spring-core</artifactId>
+    	<version>5.3.22</version>
+	</dependency>
+</dependecies>
+
+
+install Docker Desktop
+
+Docker is a set of platform as a service products that use OS-level virtualization to deliver software in packages called containers. 
+
+image ==> download
+
+docker pull mysql
+
+Container ==> 
+
+docker run -p 3306:3306 -d --name local-mysql -e MYSQL_ROOT_PASSWORD=Welcome123 mysql
+
+mysql ==> image
+local-mysql ==> container
+
+port 3306
 
 
 
