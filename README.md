@@ -1255,6 +1255,9 @@ https://sqlzoo.net/
 	a) Statement
 		id SQL is fixed ==> same sql for all requests
 		"select * from products"
+
+		https://owasp.org/Top10/A03_2021-Injection/
+
 	b) PreparedStatement
 		if SQL takes IN parameter 
 
@@ -1273,14 +1276,110 @@ https://sqlzoo.net/
 4) Close connection
 
 
+Avoid:
+"select * from products where id = " + variable ==> SQL Hijacking
+
+=======================================================================================
+
+Exception Handling
+
+* Exception ==> abnormal condition in application ==> occurs @ runtime ==> in java it is represented as object
+--> What went wrong?
+--> Why?
+--> Where?
+
+a) Unchecked type of exceptions
+	compiler doesn't force developer to handle with try-catch syntax; expected to handle with conditional statement
+
+
+	int x = 10;
+	int y = 0;
+	if(y != 0) {
+		int res = x / y; ==> ArithmeticException ==> /0 
+    }
+
+    ---
+
+    addProduct(null);
+
+    addProduct(Product p) {
+    	if(p != null) {
+    		p.getName(); // can lead to NullPointerException
+       }
+    }
+
+    Unchecked exceptions are a result of code running within JRE
+
+ b) Checked type of exception
+ 	
+ 	Compiler forces developer to handle exception using try - catch syntax
+
+
+ 		try {
+ 			Class.forName("com.mysql.cj.jdbc.Driver");
+ 		} catch(ClassNotFoundException ex) {
+ 			// message or handling code
+ 		}
+
+
+ 		try {
+ 			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/adobe_java", "root", "Welcome123");	
+ 		} catch(SQLException ex) {
+ 			//
+ 		}
+
+ 	These exceptions are a result of applicaitons outside of JRE
+
+====================================================================
+
+interface UserDao {
+	void register(User u) throws SQLException;
+}
+
+class UserDaoJdbcImpl implements UserDao {
+	public void register(User u) throws PersistenceException{
+		try {
+
+			} catch(SQLException ex) {
+				throw new PersistenceException("user with id already exists")
+			}
+	}
+}
+
+
+class UserDaoMongoDbImpl implements UserDao {
+	public void register(User u) throws PersistenceException{
+		try {
+
+			} catch(MongoException ex) {
+				throw new PersistenceException("user with id already exists")
+			}
+	}
+}
 
 
 
+=========
+
+$ docker exec -it local-mysql bash
+root@a89ad477d23e:/# mysql -u "root" -p
+Enter Password: Welcome123
+
+mysql> create database adobe_java;
+mysql> use adobe_java;
 
 
+create table products (id int PRIMARY KEY AUTO_INCREMENT, name VARCHAR(100), price double, quantity int);
+
+insert into products values (0, 'LG AC', 45000.00, 100);
+insert into products values (0, 'Samsung Fold', 165000.00, 100);
+select * from products;
 
 
+======================================================
 
 
 
 	
+
+
