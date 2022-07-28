@@ -1378,6 +1378,69 @@ mysql> select * from products;
 
 ======================================================
 
+JEE ==> Web application Development
+
+ServletTechnology ==> Java Server side code runs within ServletEngine / ServletContainer / WebContainer
+
+
+@WebServlet("/register")
+public class RegisterServlet extends HttpServlet {
+
+}
+
+@WebServlet("/login")
+public class LoginServlet extends HttpServlet {
+
+}
+
+
+ServletEngine / ServletContainer / WebContainer manages the life cycle of Servlet
+
+
+HTTP Methods
+* GET ==> address, url
+* POST ==> send payload to server 
+* PUT
+* DELETE
+* PATCH
+
+GET http://localhost:8080/products
+
+
+@WebServlet("/products")
+public class ProductServlet extends HttpServlet {
+	public void doGet(HttpServletRequest request, HttpServletResponse response) {
+		..
+	}
+	public void doPost(HttpServletRequest request, HttpServletResponse response) {
+		..
+	}
+}
+
+
+
+older apis:
+public class RegisterServlet extends HttpServlet {
+
+}
+
+web.xml ==> deployment descriptor
+
+<servlet>
+	<servlet-name>A</servlet-name>
+	<servlet-class>pkg.RegisterServlet</servlet-class>
+</servlet>
+
+<servlet-mapping>
+	<servlet-name>A</servlet-name>
+	<url-pattern>/register</url-pattern>
+</servlet-mapping>
+
+============================
+ 
+
+
+
 
 
 	
