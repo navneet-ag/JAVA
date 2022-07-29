@@ -1440,7 +1440,7 @@ web.xml ==> deployment descriptor
 
 
 Project ==> Right click ==> Run As ==> Maven build
-Goals: jetty:run
+Goals: jetty:run 
 
 Browser:
 http://localhost:8080/
@@ -1456,15 +1456,143 @@ create should be taken to deployment server
 
 =============
 
+https://www.baeldung.com/lombok-ide
+
+Day 3 Recap:
+
+JDBC ==> Integration library for Java to connect to RDBMS
+Connection, Statement, PreparedStatement and ResultSet 
+
+Exceptions ==> User Defined Exception class ==> try - catch - finally
+
+Servlet engine / Web container
+Servlet ==> Request , Response programming model
+
+@WebServlet("/register")
+public class RegisterServlet extends HttpServlet {
+	doGet(HttpServletRequest req, HttpServletResponse res) {}
+	doPost(HttpServletRequest req, HttpServletResponse res) {}
+	doPut(HttpServletRequest req, HttpServletResponse res) {}
+	doDelete(HttpServletRequest req, HttpServletResponse res) {}
+}
+
+Run Jetty on different port
+
+Goals:jetty:run -Djetty.port=9999
+
+------------------------------
+
+Day 4
+
+Spring Framework
+
+==> provides lightweight container for building enterprise application
+==> Core Spring container provides life-cycle management of beans [objects managed by spring ] and Dependency injection
+
+1) XML as metadata
+
+interface ProductDao { insert();}
+public class ProductDaoJdbcImpl implements ProductDao { insert() {}}
+public class ProductDaoMonogoImpl implements ProductDao { insert() { }}
+
+public class OrderService {
+	private ProductDao productDao;
+
+	public void setProductDao(ProductDao pdao){
+		this.productDao = pdao;
+	}
+
+	public void doTask() {
+		this.productDao.insert();
+	}
+}
+
+beans.xml
+
+<beans id="jdbc" class="pkg.ProductDaoJdbcImpl" />
+<beans id="mongo" class="pkg.ProductDaoMongoImpl" />
+
+<beans id="service" class="pkg.OrderService">
+	<property name="productDao" ref="jdbc" />
+</beans>
 
 
+========
 
- 
+public class OrderService {
+	private ProductDao firstDao;
+	private ProductDao secondDao;
+
+	public void setFirst(ProductDao pdao){
+		this.firstDao = pdao;
+	}
+
+	public void setSecond(ProductDao pdao){
+		this.secondDao = pdao;
+	}
+	public void doTask() {
+		this.productDao.insert();
+	}
+}
 
 
+<beans id="service" class="pkg.OrderService">
+	<property name="first" ref="jdbc" />
+	<property name="second" ref="mongo" />
+</beans>
+
+==================================================================
+
+2) Annotation as metadata
+
+Spring creates objects of classes which has one of these annotations at class-level
+1) Component
+2) Repository
+3) Service
+4) Configuration
+5) Controller
+6) RestControlller
 
 
+interface ProductDao { insert();}
 
+@Repository
+public class ProductDaoJdbcImpl implements ProductDao { insert() {}}
+
+id created will be "productDaoJdbcImpl"
+
+
+@Repository("jdbc")
+public class ProductDaoJdbcImpl implements ProductDao { insert() {}}
 	
+id created will be "jdbc"
 
+@Service
+public class OrderService {
+	@Autowired
+	private ProductDao firstDao;
+
+	public void doTask() {
+		this.productDao.insert();
+	}
+}
+
+
+Bytecode instrumentation is a technique for changing the code of compiled Java applications
+
+@Autowired
+private ProductDao productDao;
+
+
+can get converted into:
+a) private ProductDao productDao = new ProductDaoJdbcImpl();
+or
+b) private ProductDao productDao = ProductDaoFactory.getProductDao();
+
+Byte code instrumentation libraries:
+1) ByteBuddy
+2) JavaAssist
+3) CGLib
+
+=============
 
