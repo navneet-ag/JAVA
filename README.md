@@ -1721,4 +1721,47 @@ New Spring starter Project
 Dependencies ==> MySQL , JPA
 
 
+spring.jpa.hibernate.ddl-auto=update
 
+* if database table doesn't exist for the mapping ==> create table
+* if table already exist ==> map to existing table ==> if required alter table
+
+---
+
+spring.jpa.hibernate.ddl-auto=create
+
+* if database table doesn't exist for the mapping ==> create table
+* if table already exist ==> drop table and re-create ==> good for testing
+
+spring.jpa.hibernate.ddl-auto=verify
+* if table already exist ==> map to existing table 
+* if not exists ==> throw error
+
+
+@Table(name="employees")
+public class Employee {}
+
+
+========
+
+spring.jpa.show-sql=true
+spring.jpa.properties.hibernate.format_sql=true
+
+em.save(p); 
+em.find(Product.class, 4); 
+
+in console ==> insert into 
+	products 
+		values (....)
+
+=============
+
+
+Spring Data JPA ==> simplifies using ORM
+
+public interface ProductDao extends JpaRepository<Product, Integer> {
+}
+
+Spring DATA JPA will generate @Repository class for this interface with pre-defined methods for CRUD operations
+
+========
