@@ -7,6 +7,7 @@ import com.example.demo.dao.EmployeeDao;
 
 @Service
 public class SampleService {
+	
 	@Autowired
 	private EmployeeDao empDao;
 	

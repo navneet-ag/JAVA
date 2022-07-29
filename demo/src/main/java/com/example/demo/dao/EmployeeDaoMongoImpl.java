@@ -3,13 +3,14 @@ package com.example.demo.dao;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
 
-@Profile("dev")
+@Profile("prod")
 @Repository
-public class EmployeeDaoJdbcImpl implements EmployeeDao {
+public class EmployeeDaoMongoImpl implements EmployeeDao {
 
 	@Override
 	public void addEmployee() {
-		System.out.println("emp stored in rdbms!!!");
+		System.out.println("Mongo store!!!");
 	}
 
 }
+
