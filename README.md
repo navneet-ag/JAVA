@@ -1699,9 +1699,26 @@ public class SampleService {
 
 ============
 
-Spring instantiates beans by invoking default constructor only.
+* Spring instantiates beans by invoking default constructor only.
+* 3rd party classes to be used along with spring framework
+
 
 Solution ==> Factory pattern
 
-=================================
+===========================================================
+
+ORM ==> Object Relational Mapping ==> framework to simpilify CRUD operations using JDBC
+
+Java Application ==> ORM [Hibernate / TopLink / KODO / OpenJPA / Eclipse Link ] ==> JDBC ==> database
+
+JPA is a specification for ORM ==> helps easily switch between different ORM [ only interfaces]
+
+Java applicaiton == JPA ==> ORM ==> JDBC ==> database
+
+===
+
+New Spring starter Project
+Dependencies ==> MySQL , JPA
+
+
 

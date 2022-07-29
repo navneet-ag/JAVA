@@ -1,5 +1,6 @@
 package com.adobe.prj.entity;
 
+@Table(name="products")
 public class Product {
 	
 	private int id;
@@ -17,6 +18,7 @@ public class Product {
 		this.quantity = quantity;
 	}
 
+	@Column(name="PID", type="int")
 	public int getId() {
 		return id;
 	}
@@ -25,6 +27,7 @@ public class Product {
 		this.id = id;
 	}
 
+	@Column(name="PRD_NAME")
 	public String getName() {
 		return name;
 	}
@@ -32,7 +35,8 @@ public class Product {
 	public void setName(String name) {
 		this.name = name;
 	}
-
+	
+	@Column(name="AMOUNT", type="double")
 	public double getPrice() {
 		return price;
 	}
