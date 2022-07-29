@@ -1767,6 +1767,54 @@ Spring DATA JPA will generate @Repository class for this interface with pre-defi
 
 ================
 
-Resume @ 4:05
+Order Application ==> Association between entites
+
+Customer has many orders [ one - to - many]
+May orders can be placed by a customer [many - to -one]
+
+Order can have many items [ one - to - many]
+many items can be a part of ORder [ many-to -one]
+
+Product can be part of many orderitems [ one - to - many]
+many items can referer to a product [ many-to-one]
+
+==========================
+
+
+Order has 4 items;
+
+save(order);
+save(item1);
+save(item2);
+save(item3);
+save(item4);
+
+--
+
+delete(order);
+delete(item1);
+delete(item2);
+delete(item3);
+delete(item4);
+
+
+With Cascade
+
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name="order_fk")
+	private List<Item> items = new ArrayList<>();
+
+save(order); ==> saves all items also
+delete(order); ==> delete all items also
+
+No need for ItemDao.java
+
+===================================
+
+
+
+
+
+
 
 
