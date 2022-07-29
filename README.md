@@ -1657,3 +1657,51 @@ SpringApplication.run() ==> starts Spring Container uses Annotation "scans for p
 @SpringBootApplication contains:
 1) @ComponentScan ==> scans for classes in "com.example.demo" and sub-packges and creates objects
 2) @EnableAutoConfiguration ==> scans libraries and creates objects 
+
+
+@SpringBootApplication
+public class DemoApplication {
+
+	public static void main(String[] args) {
+		ApplicationContext ctx = SpringApplication.run(DemoApplication.class, args);
+		
+		SampleService service =  ctx.getBean("sampleService", SampleService.class);
+		
+		service.doTask();
+		
+	}
+
+}
+
+=====
+
+1) 
+
+@Service
+public class SampleService {
+	
+	@Autowired
+	private EmployeeDao empDao;
+
+2) 
+
+@Service
+public class SampleService {
+
+	private EmployeeDao empDao;
+
+	@Autowired
+	public void setDependencies(EmployeeDao dao) {
+			// validation
+		this.empDao = dao;
+	}
+
+
+============
+
+Spring instantiates beans by invoking default constructor only.
+
+Solution ==> Factory pattern
+
+=================================
+

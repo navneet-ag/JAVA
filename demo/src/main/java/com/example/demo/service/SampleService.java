@@ -9,9 +9,13 @@ import com.example.demo.dao.EmployeeDao;
 public class SampleService {
 	
 	@Autowired
+	private EmailService emailService;
+	
+	@Autowired
 	private EmployeeDao empDao;
 	
 	public void doTask() {
 		this.empDao.addEmployee();
+		emailService.sendMessage("employee added");
 	}
 }
