@@ -1811,8 +1811,35 @@ No need for ItemDao.java
 
 ===================================
 
+placing an order client passes
+	{
+		"customer" : "banu@gmail.com",
+		"items" : [
+			{"product": {"id" : 3}, qty : 2},
+			{"product": {"id" : 1}, qty : 1}
+		]
+	}
 
 
+form the data sent program has to compute "amount" of "item"; order total
+
+
+=======================
+
+New Project: ==> new database
+
+Entites:
+1) Customer
+2) Vehicle
+3) Driver
+4) Rental
+
+
+Write codes to add data into customer, vehicle and Driver  tables
+
+
+Use case 1: 
+Customer rents a vehicle
 
 
 
