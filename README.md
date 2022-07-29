@@ -1596,3 +1596,64 @@ Byte code instrumentation libraries:
 
 =============
 
+Eclipse ==> Help ==> Eclipse Marketplace ==> Search for STS
+
+Spring Tools 4 ==> 4.15.1.RELEASE
+
+if problem ==> Spring Tools 3
+
+Restart eclipse
+
+Check
+
+New ==> Spring Starter Project
+
+=============================================
+
+https://www.baeldung.com/lombok-ide
+
+java -jar lombok-1.18.4.jar
+
+=======================
+
+
+Spring Framework 5.x
+
+a) Create Spring container with XML as metadata
+ApplicationContext ctx = new ClassPathXmlApplicationContext("beans.xml");
+
+
+b) create spring container with Annotation as metadata
+
+ApplicationContext ctx = new AnnotationConfigApplicationContext();
+ctx.scan("com.adobe"); // find classes with annotations in this package and sub-pacakges
+
+
+---------
+
+
+Spring Boot is a framework on top of Spring Framework provides lots of configurations out-of-the box
+* for RDMBS ==> database connection pool is configured out-of-the box
+* for web based application ==> tomcat container is configured out-of-box
+
+<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter</artifactId>
+</dependency>
+
+
+@SpringBootApplication
+public class DemoApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(DemoApplication.class, args);
+	}
+
+}
+
+
+SpringApplication.run() ==> starts Spring Container uses Annotation "scans for packges" in "com.example.demo" and sub-packges
+
+@SpringBootApplication contains:
+1) @ComponentScan ==> scans for classes in "com.example.demo" and sub-packges and creates objects
+2) @EnableAutoConfiguration ==> scans libraries and creates objects 
