@@ -1756,6 +1756,7 @@ in console ==> insert into
 
 =============
 
+HikariDataSource  => DB connection pool
 
 Spring Data JPA ==> simplifies using ORM
 
@@ -1764,4 +1765,8 @@ public interface ProductDao extends JpaRepository<Product, Integer> {
 
 Spring DATA JPA will generate @Repository class for this interface with pre-defined methods for CRUD operations
 
-========
+================
+
+Resume @ 4:05
+
+
