@@ -2276,6 +2276,14 @@ we get:
 
 http://localhost:8080/api/products
 
+====================
+
+Try:
+
+GET
+
+http://localhost:8080/api/customers
+
 
 
 
