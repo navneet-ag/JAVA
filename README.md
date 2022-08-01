@@ -2049,10 +2049,233 @@ Check:
 1) ProductDao.java ==> added custom methods
 2) OrderService ==> calling new ProductDao.java methods
 3) Order.java ==> fetch EAGER and LAZY ==> try both
+ 
+ ================
 
-Resume @ 11:30
+Bi-Directional relationship
 
-================================
+@Entity
+@Table(name="orders")
+public class Order {
+	 
+	
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinColumn(mappedBy="order")
+	private List<Item> items = new ArrayList<>();
+
+===
+
+
+
+@Entity
+@Table(name="items")
+public class Item {
+ 	...
+	@ManyToOne
+	@JoinColumn(name="order_fk")
+	private Order order;
+	 
+
+==
+
+public interface ItemDao extends JpaRepository<Item, Integer> {
+
+}
+
+Item item = itemDao.findById(100).get();
+
+Order o = item.getOrder(); // complete order
+o.getCustomer(); // customer info can be get
+
+===
+
+n + 1 problem
+
+fetching all orders
+assume 10 orders exist
+
+select * from items where order_id = 1;
+select * from items where order_id = 2;
+select * from items where order_id = 3;
+select * from items where order_id = 4;
+select * from items where order_id = 5;
+select * from items where order_id = 6;
+select * from items where order_id = 7;
+select * from items where order_id = 8;
+select * from items where order_id = 9;
+select * from items where order_id = 10;
+
+To avoid write Joins on your own
+
+========================
+JPQL
+@Query("select new com.adobe.prj.entity.ReportDTO(o.orderDate, o.total, c.firstName, c.lastName) from Order o inner join o.customer c")
+	List<ReportDTO> getReport();
+
+SQL:
+@Query(value="select
+        order0_.order_date as col_0_0_,
+        order0_.total as col_1_0_,
+        customer1_.first_name as col_2_0_,
+        customer1_.last_name as col_3_0_ 
+    from
+        orders order0_ 
+    inner join
+        customers customer1_ 
+            on order0_.customer_fk=customer1_.email", nativeQuery=true)
+     List<ReportDTO> getReport();
+
+================
+public class Product {
+	@Column(name="name", unique=true)
+	private String name;
+}
+
+============================================
+
+RESTful web services
+
+REST ==> REpresentation State Transfer
+
+Resource? info on server
+
+State ==> value of the resource at a given point of time
+
+Representaton ==> state info is given to client in various formats ==> JSON / XML / CSV
+
+===
+
+GET product whose id = 3
+
+ 3 | iPad           |  35000 |      498
+
+XML: 
+ <product id="3">
+ 	<name>iPad</name>
+ 	<price>35000</price>
+ 	<quantity>498</quantity>
+ </product>
+
+JavaScript Object Notation:
+ {
+ 	id: 3,
+ 	name: "iPad"
+ 	price : 35000
+ }
+
+==============================================
+
+HTTP headers
+
+Accept: application/json
+content-type: application/json
+
+
+Accept: text/xml
+content-type: text/xml
+
+Accept ==> server should send json / xml represetntation
+content-type ==> what payload client is sending to server
+
+
+Each Resource should be identified by plural nouns "products", "customers", "orders"
+
+Use HTTP Methods for verbs "GET" , "POST" , "PUT" , "DELETE"
+
+1) 
+GET
+http://localhost:8080/api/products
+
+get all products in XML or JSON based on "accept" header
+
+
+2) Use Query parameters for sub-set ?
+
+GET
+http://localhost:8080/api/products?category=mobile
+http://localhost:8080/api/products?page=1&size=20 
+
+get sub-set of resource
+
+
+3)  use path-parameter for fetch based on PK /
+GET
+http://localhost:8080/api/products/4
+
+get one product whose id is "4"
+
+or to get child data
+
+GET
+http://localhost:8080/api/customers/a@adobe.com/orders
+
+get all orders of "a@adobe.com" customer
+
+---
+
+4) 
+based on content-type header client sends data to be added to resource
+POST
+http://localhost:8080/api/products
+
+payload contains data
+
+5) 
+PUT
+http://localhost:8080/api/products/4
+
+payload contains new data for product with id "4" to update
+
+5) 
+DELETE
+http://localhost:8080/api/products/4
+
+===================================================
+
+
+@RestController
+@RequestMapping("/api/products")
+public class ProductController {
+
+	@GetMapping()
+	m1() {}
+
+	@PostMapping()
+	m2() {}
+}
+
+
+
+@RestController
+@RequestMapping("/api/customers")
+public class CustomerController {
+
+	@GetMapping()
+	m1() {}
+
+	@PostMapping()
+	m2() {}
+}
+
+==
+
+By adding
+<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+</dependency>
+
+we get:
+1) Tomcat embedded web server 
+2) Spring boot provided DispatcherServlet is provided to hanndle all HTTP request [ @WebServlet("*")]
+
+3) HandlerMapping to map URL to @RestController
+4) HttpMessageHandlers/ ContentNegotiationHandler to handle Java <---> JSON is provided
+
+===========
+
+http://localhost:8080/api/products
+
 
 
 

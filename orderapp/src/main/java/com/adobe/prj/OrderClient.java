@@ -10,6 +10,7 @@ import com.adobe.prj.entity.Customer;
 import com.adobe.prj.entity.Item;
 import com.adobe.prj.entity.Order;
 import com.adobe.prj.entity.Product;
+import com.adobe.prj.entity.ReportDTO;
 import com.adobe.prj.service.OrderService;
 
 @Component
@@ -21,7 +22,16 @@ public class OrderClient implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 //		placeOrder();
 		
-		getOrders();
+//		getOrders();
+		
+//		getReport();
+	}
+
+	private void getReport() {
+		List<ReportDTO> reports = service.getOrderReport();
+		for(ReportDTO report : reports) {
+			System.out.println(report.getOrderDate() +"," + report.getTotal() + "," + report.getFirstName());
+		}
 	}
 
 	private void getOrders() {

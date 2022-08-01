@@ -14,6 +14,7 @@ import com.adobe.prj.entity.Customer;
 import com.adobe.prj.entity.Item;
 import com.adobe.prj.entity.Order;
 import com.adobe.prj.entity.Product;
+import com.adobe.prj.entity.ReportDTO;
 
 @Service
 public class OrderService {
@@ -68,5 +69,9 @@ public class OrderService {
 	@Transactional
 	public void updateProductPrice(double price, int id) {
 		productDao.updatePrice(price, id);
+	}
+	
+	public List<ReportDTO> getOrderReport() {
+		return orderDao.getReport();
 	}
 }
