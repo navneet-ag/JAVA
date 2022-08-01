@@ -60,4 +60,13 @@ public class OrderService {
 	public Customer addCustomer(Customer c) {
 		return customerDao.save(c);
 	}
+	
+	public List<Product> productsByRange(double low, double high) {
+		return productDao.fetchByRange(low, high);
+	}
+	
+	@Transactional
+	public void updateProductPrice(double price, int id) {
+		productDao.updatePrice(price, id);
+	}
 }

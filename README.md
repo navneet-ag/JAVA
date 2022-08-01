@@ -1841,7 +1841,218 @@ Write codes to add data into customer, vehicle and Driver  tables
 Use case 1: 
 Customer rents a vehicle
 
+==============
 
+
+
+Day 4:
+JPA is a specification to use ORM (Hibernate)
+
+Object Relational Mapping ==> Java Class <=== Mapped to ===> database table ==> @Table
+	Java class fields <==== mapped to ===> database columns ==> by default all class fields are mapped to columns with same same
+		In case if db columns are different from java field ==> @Column
+
+	@Transient on top of field ==> this java field will not be mapped to DB column
+
+	class Customer {
+		firstName;
+		lastName;
+
+		@Transient
+		name; ==> firstName + lastName; ==> no column called "name" in db
+	}
+
+* Primary Key is a must ==> mapped using @Id
+* composite Primary Key ==> we are not covering in this training
+
+@GeneratedValue(strategy=IDENTITY) ==> PK is auto_increment
+
+-----------------------------
+
+JpaRepository ==> any interface extended from JpaRepository ==> methods for CRUD operations are made available
+out-of-box ==> Spring Data JPA will generated classes based on the interface ==> no need for @Repository classes
+
+-----------------------
+
+Mapping between entites ==> ER
+
+* one-to-many
+* many-to-one
+* many-to-many
+* one-to-one
+
+
+@OneToMany
+@JoinColumn(--- FK --)
+
+@ManyToOne()
+@JoinColumn( ---FK---)
+
+
+@JoinColumn if used with @OneToMany will introdnuce FK in child class ==> other class ==> to which field  annotation is placed
+
+
+class Project {
+
+	@OneToMany
+	@JoinColumn(name="project_fk")
+	List<Employee> employess = ...
+}
+
+here "projecT_fk" will be in "employess" table
+
+---
+
+@JoinColumn if used with @ManyToOne will introduce FK in owing entity
+
+
+class Project {
+
+	@ManyToOne()
+	@JoinColumn(name="client_fk")
+	private Client client;
+}
+
+
+client_fk will be made available in "projects" table
+
+===================
+
+
+Cascade ===> ALL, PERSIST, DELETE
+
+
+class Order 
+@OneToMany(cascade=CascadeType.ALL)
+List<Item> items = ...
+
+	saving order saves items also
+	deleting order will delete items also
+
+	==> No need for ItemDao; complete management by OrderDao
+
+================================================================================
+
+
+
+@Component is generally placed on classes which are utilitity class ==> helper classes
+
+@Repository is placed on classes which do CRUD operation ==> connect to DB
+
+@Service ==> for service classes
+
+=================================================
+
+ @Id
+ @GeneratedValue(strategy=SEQUENCE, generator="order_id")
+ String orderId;
+
+
+ MySQL:
+
+ DELIMITER $$ 
+ CREATE PROCEDURE order_id() 
+ BEGIN     START TRANSACTION;     
+ 	UPDATE sequence SET id=LAST_INSERT_ID(id + 1);     
+ 	SELECT LAST_INSERT_ID() AS number;     
+ COMMIT; 
+ END $$ DELIMITER ;
+
+ ======================
+
+ in Hibernate ORM we use em.merge(object) ==> for update
+
+ JPA doesn't have merge() for update;
+
+ Solution is:
+
+ @Transactional
+ public void method() {
+ 	pull the entity from backend
+ 	set new values; ==> dirty check will trigger update
+ }
+
+ ====================================
+
+
+@Service
+public class RentalService {
+
+	// return vehicle
+	@Transactional
+	public void rentalReturn(int rentalId) {
+		Rental r = rentalDao.findById(rentalId).get();
+		r.setReturnDate(new Date();
+	}
+}
+
+=============================================================================
+
+
+Day 5:
+
+JpaRepository provides basic CRUD opertions
+
+* how to add custom methods for JpaRepositry
+
+public interface ProductDao extends JpaRepository<Product, Integer>{
+
+}
+
+above interface provided methods for save(), findById(), findAll(), delete(), ..
+
+* get products by existing field
+
+public interface ProductDao extends JpaRepository<Product, Integer>{
+	List<Product> findByName(String name); // select * from products where name = ?
+	List<Product> findByQuantity(int qty); // select * from products where quantity = ?
+	List<Product> findByQuantityAndPrice(int qty,  double price); 
+	// select * from products where quantity = ? and price = ?
+}
+
+* custom queries
+
+public interface ProductDao extends JpaRepository<Product, Integer>{
+
+	@Query()
+	List<Product> fetchByRange(double lower, double higher);
+}
+
+
+public interface RentalDao extends JpaRepository<Rental, Integer> {
+
+	@Query(value = "select * rentals where vehicle_fk = :regno and rental_date is NULL", nativeQuery=true)
+	List<Rental> getByRegNo(@Param("regNo") String regNo);
+}
+
+
+================
+
+
+SQL vs JP-QL
+ 
+
+ LazyInitializationException
+
+ by default OneToMany mapping is Lazy Fetch
+
+ by default ManyToOne is EAGER Fetch
+
+ @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+ @JoinColumn(name="order_fk")
+ private List<Item> items = new ArrayList<>();
+
+
+============================================
+
+Check:
+1) ProductDao.java ==> added custom methods
+2) OrderService ==> calling new ProductDao.java methods
+3) Order.java ==> fetch EAGER and LAZY ==> try both
+
+Resume @ 11:30
+
+================================
 
 
 

@@ -1,5 +1,7 @@
 package com.adobe.prj;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -17,7 +19,25 @@ public class OrderClient implements CommandLineRunner {
 	
 	@Override
 	public void run(String... args) throws Exception {
-		placeOrder();
+//		placeOrder();
+		
+		getOrders();
+	}
+
+	private void getOrders() {
+		List<Order> orders = service.getOrders();
+		for(Order o : orders) {
+			System.out.println("Order Date : " + o.getOrderDate());
+			System.out.println("Customer Email:" + o.getCustomer().getEmail());
+			System.out.println("Total : " + o.getTotal());
+			System.out.println("Items:");
+			List<Item> items = o.getItems();
+			for(Item item : items) {
+				System.out.println("Product " + item.getProduct().getName());
+				System.out.println("Qty " + item.getQty());
+				System.out.println("Amount " + item.getAmount());
+			}
+		}
 	}
 
 	private void placeOrder() {
